@@ -46,7 +46,7 @@ class CoinImageService {
                 let downloadedImage = returnedImage else { return }
                 self.image = returnedImage
                 self.imageSubscription?.cancel()
-                self .fileManager.saveImage(image: downloadedImage, imageName: self.imageName, folderName: self. folderName)
+                self .fileManager.saveImage(image: downloadedImage, imageName: self.imageName, folderName: self.folderName)
             })
 
     }
