@@ -34,6 +34,11 @@ struct PortfolioView: View {
                     trailingNavBarButtons
                 }
             })
+            .onChange(of: vm.searchText) { value, newValue in
+                if value == "" {
+                     removeSelectedCoin()
+                }
+            }
         }
     }
 }
