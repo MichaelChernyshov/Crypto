@@ -36,7 +36,7 @@ struct PortfolioView: View {
             })
             .onChange(of: vm.searchText) { value, newValue in
                 if value == "" {
-                     removeSelectedCoin()
+                    removeSelectedCoin()
                 }
             }
         }
@@ -60,7 +60,7 @@ extension PortfolioView {
                         .padding(4)
                         .onTapGesture {
                             withAnimation(.easeIn) {
-                                selectedCoin = coin
+                                updateSelectedCoin(coin: coin)
                             }
                         }
                         .background(
@@ -71,6 +71,17 @@ extension PortfolioView {
             }
             .padding(.vertical, 4)
             .padding(.leading)
+        }
+    }
+    
+    private func updateSelectedCoin (coin: CoinModel) {
+        selectedCoin = coin
+        
+        if let portfolioCoin = vm.portfolioCoins.first(where: {$0.id == coin.id}),
+           let amount = portfolioCoin.currentHoldings {
+            quantityText = "\(amount)"
+        } else {
+            quantityText = ""
         }
     }
     
@@ -128,8 +139,11 @@ extension PortfolioView {
     }
     
     private func saveButtonPressed () {
-        guard let coin = selectedCoin else { return }
-        
+        guard
+            let coin = selectedCoin,
+        let amount = Double(quantityText)
+        else { return }
+        vm.updatePortfolio(coin: coin, amount: amount)
         // save to portfolio
         // show checkmark
         withAnimation(.easeIn) {
