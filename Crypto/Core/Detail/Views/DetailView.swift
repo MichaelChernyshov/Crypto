@@ -32,7 +32,7 @@ struct DetailView: View {
         Text("Hello")
     }
 }
-// 
+
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(coin: dev.coin)
