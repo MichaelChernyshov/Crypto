@@ -101,7 +101,7 @@ extension PortfolioView {
             }
             Divider()
             HStack {
-                Text("Amount holding::")
+                Text("Amount holding:")
                     .lineLimit(1)
                     .tracking(1)
                 Spacer()
